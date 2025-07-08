@@ -13,6 +13,10 @@ const app = express();
 app.use(express.json());
 let browser; 
 
+app.get('/', async (req,res)=>{
+  return res.json("Use /api/search for Searching")
+})
+
 app.post('/api/search', async (req, res) => {
   const { country, query } = req.body;
   if (!country || !query) return res.status(400).json({ error: 'Missing country or query' });
@@ -39,8 +43,8 @@ const startServer = async () => {
     headless: true, 
     userDataDir: './.tmp-user-profile'
   });
-  console.log('🧠 Browser launched.');
-  app.listen(3000, () => console.log('🚀 MCP Shopping Server running on port 3000'));
+  console.log('Browser launched.');
+  app.listen(3000, () => console.log('Server running on port 3000'));
 };
 
 startServer();
